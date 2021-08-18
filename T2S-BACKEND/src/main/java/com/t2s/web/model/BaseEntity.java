@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -38,5 +40,17 @@ public abstract class BaseEntity {
 
 	@Column(name = "is_enabled", columnDefinition = "bit(1) not null default 1")
 	private Boolean isEnabled = true;
+
+	@PrePersist
+	public void prePersist() {
+		Date date = new Date();
+		createdAt = date;
+		updatedAt = date;
+	}
+
+	@PreUpdate
+	public void preUpdate() {
+		updatedAt = new Date();
+	}
 
 }

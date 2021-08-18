@@ -26,11 +26,15 @@ public class Container extends BaseEntity {
 	private String containerNumber;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "type", nullable = false)
 	private TypeEN type;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "status", nullable = false)
 	private StatusEN status;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "category", nullable = false)
 	private CategoryEN category;
+
 }

@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.t2s.web.model.Container;
-import com.t2s.web.service.ContainerService;
+import com.t2s.web.model.Movement;
+import com.t2s.web.service.MovementService;
 import com.t2s.web.util.ServiceCommons;
 
 @RestController
-@RequestMapping("/container")
-public class ContainerController {
+@RequestMapping("/movement")
+public class MovementController {
 
-	private final static Logger LOG = LoggerFactory.getLogger(ContainerController.class);
+	private final static Logger LOG = LoggerFactory.getLogger(MovementController.class);
 
 	@Autowired
-	private ContainerService containerService;
+	private MovementService movementService;
 
 	@Autowired
 	private ServiceCommons serviceCommons;
@@ -33,10 +33,10 @@ public class ContainerController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ResponseEntity<List<?>> findAll() {
 		try {
-			List<Container> containers = this.containerService.findAll();
-			return this.serviceCommons.createOkResponse(containers);
+			List<Movement> Movements = this.movementService.findAll();
+			return this.serviceCommons.createOkResponse(Movements);
 		} catch (Exception e) {
-			LOG.error("Exception in ContainerController, findAll()", e);
+			LOG.error("Exception in MovementController, findAll()", e);
 			return this.serviceCommons.createErrorResponse(null);
 		}
 	}
@@ -44,35 +44,35 @@ public class ContainerController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> findById(@PathVariable Long id) {
 		try {
-			Container container = this.containerService.findById(id);
-			return this.serviceCommons.createOkResponse(container);
+			Movement Movement = this.movementService.findById(id);
+			return this.serviceCommons.createOkResponse(Movement);
 		} catch (NoSuchElementException e) {
-			LOG.error("Exception in ContainerController, findById(Long id)", e);
-			return this.serviceCommons.createErrorResponse("Não foi possível encontrar o container requisitado");
+			LOG.error("Exception in MovementController, findById(Long id)", e);
+			return this.serviceCommons.createErrorResponse("Não foi possível encontrar a movimentação requisitada");
 		} catch (Exception e) {
-			LOG.error("Exception in ContainerController, findById(Long id)", e);
+			LOG.error("Exception in MovementController, findById(Long id)", e);
 			return this.serviceCommons.createErrorResponse("Ocorreu um erro inesperado");
 		}
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ResponseEntity<?> save(@RequestBody Container container) {
+	public ResponseEntity<?> save(@RequestBody Movement Movement) {
 		try {
-			Container result = this.containerService.save(container);
+			Movement result = this.movementService.save(Movement);
 			return this.serviceCommons.createOkResponse(result);
 		} catch (Exception e) {
-			LOG.error("Exception in ContainerController, save()", e);
+			LOG.error("Exception in MovementController, save()", e);
 			return this.serviceCommons.createErrorResponse("Ocorreu um problema ao salvar");
 		}
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public ResponseEntity<?> delete(@RequestParam("idContainer") Long idContainer) {
+	public ResponseEntity<?> delete(@RequestParam("idMovement") Long idMovement) {
 		try {
-			this.containerService.delete(idContainer);
+			this.movementService.delete(idMovement);
 			return this.serviceCommons.createOkResponse("Excluído com sucesso");
 		} catch (Exception e) {
-			LOG.error("Exception in ContainerController, delete()", e);
+			LOG.error("Exception in MovementController, delete()", e);
 			return this.serviceCommons.createErrorResponse("Ocorreu um problema na exclusão");
 		}
 	}

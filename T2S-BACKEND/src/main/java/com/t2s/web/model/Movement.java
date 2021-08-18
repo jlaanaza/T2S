@@ -24,6 +24,7 @@ import lombok.Setter;
 public class Movement extends BaseEntity {
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "movement_type", nullable = false)
 	private MovementTypeEN movementType;
 
 	@Temporal(TemporalType.TIMESTAMP)
