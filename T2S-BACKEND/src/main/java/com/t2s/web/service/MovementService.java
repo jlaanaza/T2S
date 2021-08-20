@@ -28,6 +28,11 @@ public class MovementService {
 		return Movement != null ? Movement.get() : null;
 	}
 
+	public List<Movement> findByContainerId(Long id) throws Exception {
+		List<Movement> movements = this.movementRepository.findByContainerId(id);
+		return movements;
+	}
+
 	public Movement save(Movement Movement) throws Exception {
 		return this.movementRepository.save(Movement);
 	}

@@ -14,3 +14,37 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/** Used to define container behavior: width, position: fixed etc... **/
+.Toastify__toast-container {
+  top: 0;
+  left: 0%;
+  -webkit-transform: translateX(0%);
+  transform: translateX(0%);
+}
+/** Classes for the displayed toast **/
+.Toastify__toast {
+  top: 0!important;
+  left: 0%!important;
+  -webkit-transform: translateX(0%)!important;
+  transform: translateX(0%)!important;
+}
+.Toastify__toast--info {
+  background: rgba(84, 136, 191, 0.9) !important;
+}
+.Toastify__toast--success {
+  background: rgba(77,191,116,.9) !important;
+}
+.Toastify__toast--warning {
+  background: rgba(191, 159, 84, 0.9) !important;
+}
+.Toastify__toast--error {
+  background: rgba(191,84,84,.9) !important;
+}
+.toast-container{
+  width: 100%;
+  position: relative;
+}
+
+
+

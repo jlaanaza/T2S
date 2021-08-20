@@ -1,8 +1,13 @@
-import axios from "axios";
-
 const base = () => {
 	return "http://localhost:8080"
 }
+
+const headers  = new Headers({
+	'Content-Type': 'application/json',
+	"Access-Control-Allow-Origin":"*"
+
+})
+
 
 const API = {
 	get: async (path = '', params = {}) => {
@@ -15,26 +20,20 @@ const API = {
 	},
 	
 
-	post: async (path = '', params = {}, isJson = true) => {
-		return await doRequest(path, async () => {
+	post: async (path = '', params = {}, json = true) => {
 
-			const url = base() + path;
-			const method = 'POST';
-			const body = isJson ? JSON.stringify(params) : params;
-			let result = null
-			const response = await fetch(url, {
-				method, headers: headersNoAxios, body
-			})
+		const url = base() + path;
+		const method = 'POST';
+		const body = JSON.stringify(params);
 
-			try {
-				result = await response.text();
-				return JSON.parse(result)
-			} catch (e) {
-				return result
-			}
+		const response = await fetch(url, {			
+			method, headers, body
+		})
+		return await json ? response.json() : response;
 
-		});
-	},	
+
+	},
+
 }
 
 async function doRequest(url, callback) {

@@ -10,6 +10,10 @@ const MovementService = {
 		return API.get(`/movement/`);
 	},	
 
+	findByContainerId: async(id = 0) => {
+		return API.get(`/movement/container/${id}`);
+	},	
+
 	save: async(movement) => {
 		return API.post(`/movement/save`,movement);
 	},	

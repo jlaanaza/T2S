@@ -27,17 +27,18 @@ public abstract class BaseEntity {
 	private Long id;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonProperty(value = "created_at")
+	@JsonProperty(value = "createdAt")
 	@Column(name = "created_at")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo")
 	private Date createdAt;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonProperty(value = "updated_at")
+	@JsonProperty(value = "updatedAt")
 	@Column(name = "updated_at")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Sao_Paulo")
 	private Date updatedAt;
 
+	@JsonProperty(value = "isEnabled")
 	@Column(name = "is_enabled", columnDefinition = "bit(1) not null default 1")
 	private Boolean isEnabled = true;
 

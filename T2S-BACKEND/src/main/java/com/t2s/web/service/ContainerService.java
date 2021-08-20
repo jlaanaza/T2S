@@ -23,8 +23,9 @@ public class ContainerService {
 		return this.containerRepository.findAll();
 	}
 
-	public Container findById(Long id) throws Exception {
-		Optional<Container> container = this.containerRepository.findByIdAndIsEnabled(id, true);
+	public Container findByContainerNumber(String containerNumber) throws Exception {
+		Optional<Container> container = this.containerRepository.findByContainerNumberAndIsEnabled(containerNumber,
+				true);
 		return container != null ? container.get() : null;
 	}
 

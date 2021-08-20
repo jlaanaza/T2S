@@ -33,8 +33,8 @@ public class MovementController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ResponseEntity<List<?>> findAll() {
 		try {
-			List<Movement> Movements = this.movementService.findAll();
-			return this.serviceCommons.createOkResponse(Movements);
+			List<Movement> movements = this.movementService.findAll();
+			return this.serviceCommons.createOkResponse(movements);
 		} catch (Exception e) {
 			LOG.error("Exception in MovementController, findAll()", e);
 			return this.serviceCommons.createErrorResponse(null);
@@ -44,13 +44,27 @@ public class MovementController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> findById(@PathVariable Long id) {
 		try {
-			Movement Movement = this.movementService.findById(id);
-			return this.serviceCommons.createOkResponse(Movement);
+			Movement movement = this.movementService.findById(id);
+			return this.serviceCommons.createOkResponse(movement);
 		} catch (NoSuchElementException e) {
 			LOG.error("Exception in MovementController, findById(Long id)", e);
 			return this.serviceCommons.createErrorResponse("Não foi possível encontrar a movimentação requisitada");
 		} catch (Exception e) {
 			LOG.error("Exception in MovementController, findById(Long id)", e);
+			return this.serviceCommons.createErrorResponse("Ocorreu um erro inesperado");
+		}
+	}
+
+	@RequestMapping(value = "container/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> findByContainerId(@PathVariable Long id) {
+		try {
+			List<Movement> movements = this.movementService.findByContainerId(id);
+			return this.serviceCommons.createOkResponse(movements);
+		} catch (NoSuchElementException e) {
+			LOG.error("Exception in MovementController, findByContainerId(Long id)", e);
+			return this.serviceCommons.createErrorResponse("Não foi possível encontrar as movimentações requisitada");
+		} catch (Exception e) {
+			LOG.error("Exception in MovementController, findByContainerId(Long id)", e);
 			return this.serviceCommons.createErrorResponse("Ocorreu um erro inesperado");
 		}
 	}

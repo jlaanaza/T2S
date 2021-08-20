@@ -16,6 +16,6 @@ public interface ContainerRepository extends CrudRepository<Container, Long> {
 	@Query("select c FROM Container c where c.isEnabled = true order by c.updatedAt desc")
 	List<Container> findAll();
 
-	Optional<Container> findByIdAndIsEnabled(Long id, Boolean isEnabled);
+	Optional<Container> findByContainerNumberAndIsEnabled(String containerNumber, Boolean isEnabled);
 
 }

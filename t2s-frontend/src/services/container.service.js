@@ -2,8 +2,8 @@ import API from "../t2s.api";
 
 const ContainerService = {  
 
-	findById: async(id = 0) => {
-		return API.get(`/container/${id}`);
+	findByContainerNumber: async(containerNumber) => {
+		return API.get(`/container/${containerNumber}`);
 	},	
 
 	findAll: async() => {
@@ -11,11 +11,11 @@ const ContainerService = {
 	},	
 
 	save: async(container) => {
-		return API.post(`/container/save`,container);
+		return API.post(`/container/update/save`,container);
 	},	
 
 	delete: async(idContainer = 0) => {
-		return API.post(`/container/delete`, idContainer);
+		return API.post(`/container/update/delete`, idContainer);
 	},
 
 }

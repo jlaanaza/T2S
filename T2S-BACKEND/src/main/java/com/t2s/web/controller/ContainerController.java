@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,21 +42,22 @@ public class ContainerController {
 		}
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> findById(@PathVariable Long id) {
+	@RequestMapping(value = "/{containerNumber}", method = RequestMethod.GET)
+	public ResponseEntity<?> findByContainerNumber(@PathVariable String containerNumber) {
 		try {
-			Container container = this.containerService.findById(id);
+			Container container = this.containerService.findByContainerNumber(containerNumber);
 			return this.serviceCommons.createOkResponse(container);
 		} catch (NoSuchElementException e) {
-			LOG.error("Exception in ContainerController, findById(Long id)", e);
+			LOG.error("Exception in ContainerController, findByContainerNumber(String containerNumber)", e);
 			return this.serviceCommons.createErrorResponse("Não foi possível encontrar o container requisitado");
 		} catch (Exception e) {
-			LOG.error("Exception in ContainerController, findById(Long id)", e);
+			LOG.error("Exception in ContainerController, findByContainerNumber(String containerNumber)", e);
 			return this.serviceCommons.createErrorResponse("Ocorreu um erro inesperado");
 		}
 	}
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@CrossOrigin
+	@RequestMapping(value = "/update/save", method = RequestMethod.POST)
 	public ResponseEntity<?> save(@RequestBody Container container) {
 		try {
 			Container result = this.containerService.save(container);
@@ -66,7 +68,7 @@ public class ContainerController {
 		}
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/update/delete", method = RequestMethod.POST)
 	public ResponseEntity<?> delete(@RequestParam("idContainer") Long idContainer) {
 		try {
 			this.containerService.delete(idContainer);

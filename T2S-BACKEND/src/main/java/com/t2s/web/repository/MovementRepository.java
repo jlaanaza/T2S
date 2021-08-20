@@ -13,9 +13,12 @@ import com.t2s.web.model.Movement;
 public interface MovementRepository extends CrudRepository<Movement, Long> {
 
 	@Override
-	@Query("select c FROM Movement c where c.isEnabled = true order by c.updatedAt desc")
+	@Query("select m FROM Movement m where m.isEnabled = true order by m.updatedAt desc")
 	List<Movement> findAll();
 
 	Optional<Movement> findByIdAndIsEnabled(Long id, Boolean isEnabled);
+
+	@Query("select m FROM Movement m where m.isEnabled = true and m.container.id = :id order by m.updatedAt desc")
+	List<Movement> findByContainerId(Long id);
 
 }

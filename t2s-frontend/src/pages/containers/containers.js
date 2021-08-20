@@ -17,13 +17,17 @@ export default function Home({containers}) {
       <main className={styles.main}>
         <h1 className={styles.title}>
           T2S
-        </h1>
+        </h1>  
+
+        <Link href="/novo-conteiner"> 
+            <a className={styles.button}>Novo container </a>
+        </Link>      
 
         <p className={styles.description}>
               {containers.map((container) => (  
-                <Link href={`/conteiner/${container.id}`}>
+                <Link href={`/conteiner/${container.containerNumber}`}>
                 <a>
-                  <span >{container.containerNumber}</span>
+                  <p >{container.containerNumber}</p>
     
                 </a>
               </Link>    
